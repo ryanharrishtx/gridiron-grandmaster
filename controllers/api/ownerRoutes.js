@@ -3,13 +3,13 @@ const { Owner } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await Owner.create(req.body);
+    const ownerData = await Owner.create(req.body);
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = ownerData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.status(200).json(ownerData);
     });
   } catch (err) {
     res.status(400).json(err);
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const ownerData = await User.findOne({ where: { email: req.body.email } });
+    const ownerData = await Owner.findOne({ where: { email: req.body.email } });
 
     if (!ownerData) {
       res
@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await ownerData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res
@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = ownerData.id;
       req.session.logged_in = true;
       
       res.json({ user: ownerData, message: 'You are now logged in!' });
