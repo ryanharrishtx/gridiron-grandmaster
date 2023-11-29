@@ -1,13 +1,17 @@
-const User = require('./User');
+const Owner = require('./Owner');
 const Team = require('./Team');
 
-User.hasMany(Team, {
+Owner.hasMany(Team, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
 
-Team.belongsTo(User, {
+Team.belongsTo(Owner, {
   foreignKey: 'user_id'
 });
 
-module.exports = { User, Team };
+module.exports = { Owner, Team };
+
+
+const Team = require('./Team');
+const Owner = require('./Owner');
