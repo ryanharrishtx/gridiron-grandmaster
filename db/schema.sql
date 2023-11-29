@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS owner_db;
+CREATE DATABASE owner_db;
