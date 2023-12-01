@@ -1,0 +1,55 @@
+.nav{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    padding: 2rem;
+    background-color: rgb(244, 235, 215);
+    margin-top: 0;
+}
+
+.nav li{
+    list-style: none;
+}
+.nav li a{
+    color:black;
+}
+footer{
+    margin-bottom: 0;  
+    background-color: rgb(246, 16, 16);
+    padding: 3rem;
+}
+
+.social-icons{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.social-icons li{
+    list-style: none;
+}
+.social-icons li a{
+    color:black;
+}
+body{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.header{
+    text-align: center;
+    
+}
+.teamContainer{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+}
+.teamCard{
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px rgba(255, 21, 21, 0.8);
+    max-width: 30rem;
+    min-width: 15rem;
+}

@@ -1,0 +1,28 @@
+<section class="team">
+    <div class="header">
+        <span>
+            fantasy foot daddios
+        </span>
+    </div>
+    <div class="teamContainer">
+        {{#each teams as |team|}}
+        <section class="teamCard">
+            <div class="teamName">
+                <span>
+                    team name: {{team.name}}
+                </span>
+            </div>
+            <div class="teamDescription">
+                <span>
+                   foot: {{team.description}}
+                </span>
+            </div>
+            <div class="teamOwner">
+                <span>
+                    Owner: {{team.owner.name}}
+                </span>
+            </div>
+        </section>
+        {{/each}}
+    </div>
+</section>
