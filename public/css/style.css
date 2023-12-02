@@ -3,7 +3,7 @@
     gap: 1rem;
     justify-content: flex-start;
     padding: 2rem;
-    background-color: rgb(244, 235, 215);
+    background-color: black;
     margin-top: 0;
 }
 
@@ -11,30 +11,38 @@
     list-style: none;
 }
 .nav li a{
-    color:black;
+    color:white;
+    text-decoration: none;
+    text-align: center;
 }
-footer{
-    margin-bottom: 0;  
-    background-color: rgb(246, 16, 16);
-    padding: 3rem;
+.logo {
+    max-width: 50%;
+
 }
 
-.social-icons{
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-}
-
-.social-icons li{
-    list-style: none;
-}
-.social-icons li a{
-    color:black;
-}
 body{
     margin:0;
     padding:0;
     box-sizing: border-box;
+    background-color: black;
+    color: white;
+}
+
+.teamNames {
+    text-align: center;;
+}
+
+.teamLogoButton {
+    background-color: black;
+    border: none;
+}
+
+.teamLogoButton.selected {
+    background-color: white; /* Set the background color when selected */
+}
+
+.teamLogoPhoto {
+    max-width: 25%;
 }
 
 .header{
