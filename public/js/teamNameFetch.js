@@ -4,9 +4,6 @@ const fetchMyData = async () => {
         const teams = data.sports[0].leagues[0].teams
         const teamNames = teams.map(team => team.team.displayName)
         console.log(teamNames)
-
-        const teamNameButton = document.getElementById('teamNameButton');
-        teamNameButton.addAttribute('value', teamNames);
     }
     
     fetchMyData();
