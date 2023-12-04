@@ -1,16 +1,24 @@
+<!-- Your existing HTML code -->
 <section>
     <div class="teamNames">
         <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
         <h1>Select 3 Teams</h1>
-    {{!-- <ul class="teamSelection">
-    {{#each teams}}
-    <li class="teamNameButton"><button>{{this.team.displayName}}</button></li>
-    {{/each}}
-    </ul> --}}
 
-    {{#each logos}}
-    <button class="teamLogoButton"><img src="{{this}}" class="teamLogoPhoto"></button>  
-    {{/each}}
+        <!-- Render the team names -->
+        <ul class="teamSelection">
+            {{#each teams}}
+                <li class="teamNameButton">
+                    <button>{{this}}</button>
+                </li>
+            {{/each}}
+        </ul>
+
+        <!-- Render the logos -->
+        {{#each logos}}
+            <button class="teamLogoButton">
+                <img src="{{this}}" class="teamLogoPhoto">
+            </button>
+        {{/each}}
     </div>
 </section>
 
@@ -23,10 +31,10 @@
                 // Toggle background color on button click
                 button.classList.toggle('selected');
 
-        const selectedButtons = document.querySelectorAll('.teamLogoButton.selected');
-            if (selectedButtons.length > 3) {
+                const selectedButtons = document.querySelectorAll('.teamLogoButton.selected');
+                if (selectedButtons.length > 3) {
                     button.classList.remove('selected');
-                 }
+                }
             });
         });
     });
