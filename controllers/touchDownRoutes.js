@@ -3,21 +3,22 @@ const { Owner, Team } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    const teamData = await Team.findAll({
-      include: [
-        {
-          model: Owner,
-          attributes: ["name"],
-        },
-      ],
+    res.render("landingPage", {
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-    const teams = teamData.map((team) => team.get({ plain: true }));
-
-    res.render("touchDown", {
-      teams,
-      logged_in: req.session.logged_in,
-    });
+router.get("/login", async (req, res) => {
+  try {
+    if (req.session.logged_in) {
+      res.redirect("/");
+      return;
+    } else {
+      res.render("login", {
+      });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
