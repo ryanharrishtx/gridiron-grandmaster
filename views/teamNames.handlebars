@@ -4,21 +4,22 @@
         <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
         <h1>Select 3 Teams</h1>
 
-        <!-- Render the team names -->
-        <ul class="teamSelection">
-            {{#each teams}}
-                <li class="teamNameButton">
-                    <button>{{this}}</button>
-                </li>
-            {{/each}}
-        </ul>
+        <!-- Render the team names and logos next to each other -->
+        <div class="teamContainer">
+            <ul class="teamSelection">
+                {{#each teams}}
+                    <li class="teamName">
+                        {{this}}
+                    </li>
+                {{/each}}
+            </ul>
 
-        <!-- Render the logos -->
-        {{#each logos}}
-            <button class="teamLogoButton">
-                <img src="{{this}}" class="teamLogoPhoto">
-            </button>
-        {{/each}}
+            {{#each logos}}
+                <button class="teamLogoButton">
+                    <img src="{{this}}" class="teamLogoPhoto">
+                </button>
+            {{/each}}
+        </div>
     </div>
 </section>
 
@@ -39,3 +40,5 @@
         });
     });
 </script>
+
+

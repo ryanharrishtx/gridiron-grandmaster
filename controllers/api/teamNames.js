@@ -4,23 +4,15 @@ router.get('/', async (req, res) => {
   try {
     const response = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams');
     const data = await response.json();
-    console.log(data); // Log the API response for reference
-
-    // Check if the necessary properties exist
-    if (!data || !data.sports || !data.sports[0] || !data.sports[0].leagues || !data.sports[0].leagues[0] || !data.sports[0].leagues[0].teams) {
-      throw new Error('Invalid API response structure');
-    }
-
+    
     const teams = data.sports[0].leagues[0].teams;
 
-    // Add additional logging
-    console.log('Teams:', teams);
-
     // Extract team names and logos
-    const teamInfo = teams.map(team => ({
-      displayName: team.team.displayName || 'Unknown Team', // Use the correct property for team name
-      logo: team.team.logos[0]?.href || null, // Use the correct property for team logo
-    }));
+    const teamInfo = teams.map(team => {
+      const displayName = team.team.displayName || team.displayName;
+      const logo = team.team.logos[0]?.href || team.logos[0]?.href || null;
+      return { displayName, logo };
+    });
 
     console.log(teamInfo);
 
