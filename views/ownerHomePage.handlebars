@@ -1,9 +1,21 @@
 <section>
-    <div class="homePage">
+    <div class="header">
         <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
-        <h1>Team Name</h1>
+        <div id="homePage">
+        <h2>TEAM NAME</h2>
+        <h2 class="teamName">{{teamName}}</h2>
+        <h2 class="teams">TEAMS</h2>
+        <ul class="teamsList">
+            {{#each teams}}
+            <li class="teamsListItem">{{this.teamName}}</li>
+            {{/each}}
+        </ul>
+        <h2 class="rank">RANK:</h2>
+        <h2 class="rankNumber">{{rank}} out of {{total}}</h2>
+        <h2 class="winLossRecords">WIN/LOSS RECORDS</h2>
         {{#each teams}}
         <p class="winLossRecords">{{this.teamName}}: {{this.winLossRecord}}</p>
         {{/each}}
+    </div>
     </div>
 </section>

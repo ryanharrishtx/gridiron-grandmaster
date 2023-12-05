@@ -1,0 +1,18 @@
+<section>
+    <div class="createAccount">
+        <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
+        <h1>CREATE ACCOUNT</h1>
+        <form action="/createAccount" id="createAccountForm" method="POST">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="Email" required>
+            <label for="teamname">Team Name</label>
+            <input type="text" name="teamname" id="teamname" placeholder="Team Name" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+            <button type="submit" class="createAccountButton">Create Account</button>
+        </form>
+</section>
+
+<script src="/js/createAccount.js"></script>

@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const apiRoutes = require('./api');
-const touchDownRoutes = require('./touchDownRoutes');
+const landingPage = require('./landingPage');
 
 router.use("/api", apiRoutes);
-router.use("/", touchDownRoutes);
+router.use("/", landingPage);
 router.use((req, res) => {
     res.send("<h1>Wrong Route!</h1>")
   });

@@ -24,4 +24,19 @@ router.get("/login", async (req, res) => {
   }
 });
 
+router.get("/createAccount", async (req, res) => {
+  try {
+    if (req.session.logged_in) {
+      res.redirect("/");
+      return;
+    } else {
+      res.render("createAccount", {
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+);
+
 module.exports=router
