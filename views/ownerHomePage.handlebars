@@ -1,0 +1,9 @@
+<section>
+    <div class="homePage">
+        <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
+        <h1>Team Name</h1>
+        {{#each teams}}
+        <p class="winLossRecords">{{this.teamName}}: {{this.winLossRecord}}</p>
+        {{/each}}
+    </div>
+</section>
