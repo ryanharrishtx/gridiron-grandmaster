@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3001;
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
 
+//our session is saving the user selections
 const sess = {
   secret: 'Super secret secret',
   cookie: {
@@ -36,7 +37,7 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public'), {extensions: ['png']}));
+app.use(express.static(path.join(__dirname, 'public'), { extensions: ['png'] }));
 app.use(session(sess))
 
 app.use(routes);

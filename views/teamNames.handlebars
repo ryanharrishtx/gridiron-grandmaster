@@ -7,25 +7,28 @@
         <div class="teamContainer">
             <div class="teamSelection">
                 {{#each teamInfo as | selectedTeams |}}
-                   
-                  <button class="teamLogoButton" data-team="{{selectedTeams.displayName}}" data-logo="{{selectedTeams.logo}}">
+
+                <button class="teamLogoButton" data-team="{{selectedTeams.displayName}}"
+                    data-logo="{{selectedTeams.logo}}">
                     {{selectedTeams.displayName}}
                     <img src="{{selectedTeams.logo}}" class="teamLogoPhoto">
                 </button>
-            {{/each}}
+                {{/each}}
             </div>
 
-            
+
 
         </div>
     </div>
+    <button id="submitTeams">Submit Teams</button>
+
 </section>
 
 <script>
 
-    document.addEventListener('click', () => {
-        const selectedTeams = [];
-        
+    document.addEventListener('DOMContentLoaded', () => {
+        let selectedTeams = [];
+
         const buttons = document.querySelectorAll('.teamLogoButton');
 
         buttons.forEach(button => {
@@ -35,15 +38,15 @@
 
                 const teamName = button.getAttribute('data-team');
                 const teamLogo = button.getAttribute('data-logo');
-               
+
 
                 if (button.classList.contains('selected')) {
-                    // Add selected team to the array
-                    selectedTeams.push(teamName);
-                    selectedTeams.push(teamLogo);
+                    // Add selected teams to the array as an object
+                    selectedTeams.push({ teamName, teamLogo });
+
                 } else {
                     // Remove unselected team from the array
-                    const index = selectedTeams.indexOf(teamName);
+                    const index = selectedTeams.findIndex(team => team.name === teamName);
                     if (index !== -1) {
                         selectedTeams.splice(index, 1);
                     }
@@ -56,22 +59,34 @@
                         unselectButton.classList.remove('selected');
                     }
                 }
-                console.log(selectedTeams);
-                fetch("/owner", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application.json"
-                    },
-                    body: JSON.stringify({value:selectedTeams}),                  
 
+                console.log(selectedTeams, "teams selected")
 
-                }).then(data => {
-               window.location.href = "/owner"
-  console.log(data);
-                })
 
             });
         });
+
+        document.getElementById('submitTeams').addEventListener('click', () => {
+            fetch("/owner", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ selectedTeams: selectedTeams }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        //this will hit the get route in your ownerHomePage.js, once it navigates there
+                        window.location.href = "/owner";
+                    } else {
+                        console.error('Failed to send selected teams');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during fetch: ', error);
+                });
+        });
+
     });
 
 
