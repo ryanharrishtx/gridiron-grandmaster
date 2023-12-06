@@ -18,12 +18,8 @@ Team.init(
     description: {
       type: DataTypes.STRING,
     },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    user_id: {
+
+    owner_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
@@ -36,7 +32,7 @@ Team.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'project',
+    modelName: 'team',
   }
 );
 

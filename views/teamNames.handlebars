@@ -1,0 +1,93 @@
+<section>
+    <div class="teamNames">
+        <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
+        <h1>Select 3 Teams</h1>
+
+        <!-- Render the team names and logos next to each other -->
+        <div class="teamContainer">
+            <div class="teamSelection">
+                {{#each teamInfo as | selectedTeams |}}
+
+                <button class="teamLogoButton" data-team="{{selectedTeams.displayName}}"
+                    data-logo="{{selectedTeams.logo}}">
+                    {{selectedTeams.displayName}}
+                    <img src="{{selectedTeams.logo}}" class="teamLogoPhoto">
+                </button>
+                {{/each}}
+            </div>
+
+
+
+        </div>
+    </div>
+    <button id="submitTeams">Submit Teams</button>
+
+</section>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let selectedTeams = [];
+
+        const buttons = document.querySelectorAll('.teamLogoButton');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Toggle background color on button click
+                button.classList.toggle('selected');
+
+                const teamName = button.getAttribute('data-team');
+                const teamLogo = button.getAttribute('data-logo');
+
+
+                if (button.classList.contains('selected')) {
+                    // Add selected teams to the array as an object
+                    selectedTeams.push({ teamName, teamLogo });
+
+                } else {
+                    // Remove unselected team from the array
+                    const index = selectedTeams.findIndex(team => team.name === teamName);
+                    if (index !== -1) {
+                        selectedTeams.splice(index, 1);
+                    }
+                }
+                // Ensure no more than 3 teams are selected
+                if (selectedTeams.length > 3) {
+                    const unselectTeam = selectedTeams.shift();
+                    const unselectButton = document.querySelector(`[data-team="${unselectTeam}"]`);
+                    if (unselectButton) {
+                        unselectButton.classList.remove('selected');
+                    }
+                }
+
+                console.log(selectedTeams, "teams selected")
+
+
+            });
+        });
+
+        document.getElementById('submitTeams').addEventListener('click', () => {
+            fetch("/owner", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ selectedTeams: selectedTeams }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        //this will hit the get route in your ownerHomePage.js, once it navigates there
+                        window.location.href = "/owner";
+                    } else {
+                        console.error('Failed to send selected teams');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during fetch: ', error);
+                });
+        });
+
+    });
+
+
+</script>

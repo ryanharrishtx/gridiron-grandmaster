@@ -1,0 +1,68 @@
+<section>
+    <div class="header">
+        <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
+        <div id="homePage">
+            <h2>TEAM NAME</h2>
+            <h2 class="teamName">{{teamName}}</h2>
+            <h2 class="teams">TEAMS</h2>
+            <ul class="teamsList">
+                {{#each selectedTeams}}
+                <li class="teamsListItem">{{this.teamName}}</li>
+                {{/each}}
+            </ul>
+            <h2 class="rank">RANK:</h2>
+            <h2 class="rankNumber">{{rank}} out of {{total}}</h2>
+            <h2 class="winLossRecords">WIN/LOSS RECORDS</h2>
+            {{#each selectedTeams}}
+            <p class="winLossRecords">{{this.teamName}}: {{this.winLossRecord}}</p>
+            <img src="{{this.teamLogo}}" alt="{{this.teamName}}">
+            {{/each}}
+        </div>
+</section>
+
+{{!-- selectedTeams is your data that is being selected, this is, it is coming from a user that selects the data, if you
+look at the file teamNames.handlebars we have an event listener
+in line 69 that is listening for a button with submitTeams id to get click. Once it does, it does a post, which means it
+sends that data to the sever. , post allows us to save data, we are saving this data in a session
+In the file ownerHomePage.js we then parse the body that was sent to the server with const selectedTeams =
+req.body.selectedTeams; we then
+save that data to our session here req.session.selectedTeams = selectedTeams; our session is middle ware from
+app.use(session(sess)) that is coming from our server.js
+we then in our .get request in our ownerHomePage.js are calling on to that session information and rendering the
+selectedTeams. in our OwnerHomePage.handlebars we
+pass it to our handlebars with this res.render('ownerHomePage', { selectedTeams: req.session.selectedTeams || [] }); we
+say we want this data to be known as seledtedTeams but if there is no data, then just render an empy array
+--}}
+
+
+{{!-- Important Note:
+
+fetch("/owner", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({ selectedTeams: selectedTeams }),
+})
+
+this causes a post, which if you look at
+
+router.post('/', async (req, res) => {
+const selectedTeams = req.body.selectedTeams;
+// this right here saves to session
+req.session.selectedTeams = selectedTeams;
+res.render('ownerHomePage', { selectedTeams: selectedTeams });
+});
+
+we are saving to a session, if you manually where to navigate to /owner you would see the data
+
+However, the reason we need two renders in post and get, is that this
+window.location.href = "/owner"; redirect after the user hits submit causes a .get from here
+router.get('/', async (req, res) => {
+res.render('ownerHomePage', { selectedTeams: req.session.selectedTeams || [] });
+});
+
+so that is why before we where not seeing our data since it was being overwritten with a redirect a .get request.
+
+
+--}}
