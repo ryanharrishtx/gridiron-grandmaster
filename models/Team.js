@@ -23,7 +23,7 @@ Team.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    user_id: {
+    owner_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
