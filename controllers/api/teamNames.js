@@ -16,11 +16,13 @@ router.get('/', async (req, res) => {
 
     console.log(teamInfo);
 
-    res.render("teamNames", { teamInfo });
+ res.render("teamNames", { teamInfo });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
   }
 });
+
+    
 
 module.exports = router;

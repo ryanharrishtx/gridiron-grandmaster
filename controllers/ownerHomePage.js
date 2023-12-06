@@ -18,11 +18,16 @@ router.get('/', async (req, res) => {
         }, []);
 
         // Pass the correct variable name 'teams' to res.render
-        res.render("ownerHomePage", { teams: teams });
+res.render("ownerHomePage", { teams: teams });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+router.post('/', async (req, res) => {
+    const selectedTeams = req.body.value;
+    console.log(selectedTeams);
+    res.render('ownerHomePage', { selectedTeams });
+  });
 
 module.exports = router;

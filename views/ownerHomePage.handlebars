@@ -12,6 +12,12 @@
         </ul>
         <h2 class="rank">RANK:</h2>
         <h2 class="rankNumber">{{rank}} out of {{total}}</h2>
+      
+        <p>THIS IS LARGE</p>
+        <p>{{selectedTeams}}</p>
+ {{#each selectedTeams}}
+        <p class="winLossRecords">{{this}}</p>
+        {{/each}}
         <h2 class="winLossRecords">WIN/LOSS RECORDS</h2>
         {{#each teams}}
         <p class="winLossRecords">{{this.teamName}}: {{this.winLossRecord}}</p>
