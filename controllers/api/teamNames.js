@@ -16,13 +16,7 @@ router.get('/', async (req, res) => {
 
     console.log(teamInfo);
 
-    const teamNames = teamInfo.map(team => team.displayName);
-    const logos = teamInfo.map(team => team.logo);
-
-    console.log(teamNames);
-    console.log(logos);
-
-    res.render("teamNames", { teams: teamNames, logos: logos });
+    res.render("teamNames", { teamInfo });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);

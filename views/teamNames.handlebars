@@ -1,4 +1,5 @@
-<!-- Your existing HTML code -->
+const selectedTeams = require(../selectedTeams)
+
 <section>
     <div class="teamNames">
         <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
@@ -6,39 +7,19 @@
 
         <!-- Render the team names and logos next to each other -->
         <div class="teamContainer">
-            <ul class="teamSelection">
-                {{#each teams}}
-                    <li class="teamName">
-                        {{this}}
-                    </li>
-                {{/each}}
-            </ul>
-
-            {{#each logos}}
-                <button class="teamLogoButton">
-                    <img src="{{this}}" class="teamLogoPhoto">
+            <div class="teamSelection">
+                {{#each teamInfo as | selectedTeams |}}
+                   
+                  <button class="teamLogoButton" data-team="{{selectedTeams.displayName}}" data-logo="{{selectedTeams.logo}}">
+                    {{selectedTeams.displayName}}
+                    <img src="{{selectedTeams.logo}}" class="teamLogoPhoto">
                 </button>
             {{/each}}
+            </div>
+
+            
+
         </div>
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const buttons = document.querySelectorAll('.teamLogoButton');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Toggle background color on button click
-                button.classList.toggle('selected');
-
-                const selectedButtons = document.querySelectorAll('.teamLogoButton.selected');
-                if (selectedButtons.length > 3) {
-                    button.classList.remove('selected');
-                }
-            });
-        });
-    });
-</script>
-
 
