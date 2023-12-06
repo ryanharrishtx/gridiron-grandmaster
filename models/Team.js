@@ -18,11 +18,7 @@ Team.init(
     description: {
       type: DataTypes.STRING,
     },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
+
     owner_id: {
       type: DataTypes.INTEGER,
       references: {
