@@ -3,7 +3,7 @@
         <img src="/images/gglogo.png" class="logo" alt="gridiron grandmaster logo">
         <div id="homePage">
             <h2>TEAM NAME</h2>
-            <h2 class="teamName">{{teamName}}</h2>
+            <h2 class="teamName">{{teamNames}}</h2>
             <h2 class="teams">TEAMS</h2>
             <ul class="teamsList">
                 {{#each selectedTeams}}
@@ -19,6 +19,21 @@
             {{/each}}
         </div>
 </section>
+
+<script>
+const fetchMyData = async function() {
+    const response = await fetch('https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams');
+    const data = await response.json();
+    const teams = data.sports[0].leagues[0].teams;
+    const teamNames = teams.map(function(team) {
+        return team.team.displayName;
+    });
+    console.log(teamNames);
+};
+
+fetchMyData();
+
+</script>
 
 {{!-- selectedTeams is your data that is being selected, this is, it is coming from a user that selects the data, if you
 look at the file teamNames.handlebars we have an event listener
